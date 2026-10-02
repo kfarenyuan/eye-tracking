@@ -52,12 +52,13 @@ button{cursor:pointer}
 }
 .top{grid-area:top; display:flex; gap:var(--gap); align-items:stretch}
 .tabs{flex:1; display:flex; gap:var(--gap)}
-.tab{
-  flex:1; min-height:clamp(64px,9vh,96px); border:0; border-radius:var(--radius);
-  background:var(--surface); box-shadow:inset 0 -8px 0 var(--cat);
-  display:flex; align-items:center; justify-content:center; gap:.4em;
-  font-size:clamp(1.2rem,2.4vw,2rem); font-weight:700;
+.tabs > .tab{
+  flex:1; min-width:0; min-height:clamp(88px,13vh,132px); border:0; border-radius:var(--radius);
+  background:var(--surface); box-shadow:inset 0 -10px 0 var(--cat);
+  display:flex; align-items:center; justify-content:center; gap:.35em; padding:0 .3em;
+  font-size:clamp(1.4rem,3vw,2.5rem); font-weight:800; white-space:nowrap;
 }
+@media (orientation:portrait){ .tabs > .tab{flex-direction:column; gap:.05em; font-size:clamp(1.2rem,3.4vw,2rem)} }
 .tab[aria-selected="true"]{background:var(--cat); color:var(--on-cat); box-shadow:none}
 .meta{display:flex; flex-direction:column; align-items:flex-end; justify-content:space-between; min-width:7.5em}
 .clock{font-size:clamp(1rem,1.6vw,1.35rem); color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap}
@@ -86,8 +87,8 @@ button{cursor:pointer}
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.15em; padding:.6em .4em .4em;
 }
 .cell:active{background:var(--surface-2)}
-.cell .ico{font-size:clamp(2rem,5.2vh,3.6rem); line-height:1.1}
-.cell .lbl{font-size:clamp(1.25rem,3.4vh,2.3rem); font-weight:700; line-height:1.25; text-align:center; word-break:keep-all; overflow-wrap:anywhere}
+.cell .ico{font-size:clamp(2.4rem,7vh,4.8rem); line-height:1.1}
+.cell .lbl{font-size:clamp(1.4rem,4.2vh,2.8rem); font-weight:700; line-height:1.25; text-align:center; word-break:keep-all; overflow-wrap:anywhere; text-wrap:balance}
 .cell .sub{font-size:clamp(.85rem,1.9vh,1.15rem); color:var(--muted); font-weight:500; text-align:center}
 
 .quick{color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.1em; font-weight:800}
@@ -177,6 +178,18 @@ input[type=checkbox]{width:28px; height:28px}
 .rest-actions{display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); height:clamp(96px,16vh,150px)}
 .rest-btn{background:#16212C; color:#E8EEF3; font-size:clamp(1.3rem,3.6vh,2.2rem); font-weight:700; --cat:#E8EEF3}
 .rest-btn.call{background:#3A1414; --cat:#FF8A8A}
+/* ---------- 游標監控 ---------- */
+.mtable{width:100%; border-collapse:collapse; font-size:.95rem; margin:6px 0 4px}
+.mtable th,.mtable td{text-align:left; padding:7px 6px; border-bottom:1px solid var(--line); vertical-align:top}
+.mtable th{color:var(--muted); font-weight:600}
+.mtable th.n,.mtable td.n{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+.mscroll{overflow-x:auto}
+.heat{position:fixed; inset:0; z-index:45}
+.heat[hidden]{display:none}
+.heat canvas{position:absolute; inset:0; width:100%; height:100%}
+.heat-bar{position:absolute; left:50%; bottom:calc(16px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); background:rgba(10,16,22,.88); color:#fff; border-radius:16px; padding:12px 16px; display:flex; gap:14px; align-items:center; max-width:92vw}
+.heat-bar span{font-size:.95rem; line-height:1.4}
+.heat-scale{width:120px; height:12px; border-radius:6px; background:linear-gradient(90deg,rgba(255,220,80,.35),rgba(255,140,40,.6),rgba(230,40,40,.85)); flex:none}
 .toast{
   position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%);
   background:var(--text); color:var(--bg); padding:.7em 1.2em; border-radius:14px; font-size:1.05rem; z-index:40;
@@ -246,13 +259,23 @@ input[type=checkbox]{width:28px; height:28px}
     <div class="seg" id="editCats"></div>
     <div id="editList"></div>
     <div class="actions"><button class="btn" id="addItem">＋ 新增按鈕</button></div>
-    <p class="note">每個分類最多 12 個按鈕。文字就是朗讀的內容，可以寫成完整句子，例如「請幫我抽痰」。</p>
+    <p class="note">每個分類最多 6 個按鈕，排在越前面越容易選到（左上角開始）。文字就是朗讀的內容，可以寫成完整句子，例如「請幫我抽痰」。</p>
 
     <h2>App 捷徑</h2>
     <p class="note">病人選了 App 按鈕後會先出現確認畫面，再選「開啟」才會跳到該 App。新增後請按「測試」確認能正常開啟。</p>
     <div id="appList"></div>
     <div class="actions"><button class="btn" id="addApp">＋ 新增 App 捷徑</button></div>
     <p class="note">「開啟方式」選 App 會直接叫出已安裝的 App；如果打不開，改成「網頁連結」試試看。LINE 好友頁面打開後，可再選聊天或通話。要回到溝通板，請用眼動追蹤的輔助觸控選單回到主畫面或 App 切換器。</p>
+
+    <h2>游標監控（優化數據）</h2>
+    <div class="row"><label for="sMetrics">收集游標與選取數據<small>只存在這台裝置，不會上傳；用來調整停留時間、按鈕大小與版面</small></label><input type="checkbox" id="sMetrics"></div>
+    <div id="mSummary"></div>
+    <div class="actions">
+      <button class="btn" id="mHeat">顯示注視熱點圖</button>
+      <button class="btn" id="mExport">匯出數據（JSON）</button>
+      <button class="btn btn-danger" id="mClear">清除數據</button>
+    </div>
+    <p class="note">「選取時間」是游標進入按鈕到觸發選取的時間，包含視線移動、穩定與系統停留控制的時間。「看了沒選」是游標停在按鈕上 0.6 秒以上卻沒有選取。「快速關閉」是需求畫面出現後約 2 秒內就被關掉，可能代表選錯。</p>
 
     <h2>最近的需求紀錄</h2>
     <ul class="log" id="log"></ul>
@@ -272,6 +295,15 @@ input[type=checkbox]{width:28px; height:28px}
 
 <div data-own class="toast" id="toast" role="status"></div>
 
+<section data-own class="heat" id="heat" hidden aria-label="注視熱點圖">
+  <canvas id="heatCanvas"></canvas>
+  <div class="heat-bar">
+    <div class="heat-scale" aria-hidden="true"></div>
+    <span id="heatInfo"></span>
+    <button class="btn" id="heatClose">關閉</button>
+  </div>
+</section>
+
 <section data-own class="rest" id="rest" hidden aria-label="休息中">
   <button class="target rest-confirm" id="restConfirm"></button>
   <div class="rest-center dim">
@@ -289,7 +321,8 @@ input[type=checkbox]{width:28px; height:28px}
 "use strict";
 const PAGE_SRC = document.documentElement.outerHTML;
 const KEY = "gazeboard:v1";
-const MAX_ITEMS = 12;
+const MAX_ITEMS = 12;      // App 捷徑上限
+const MAX_CAT_ITEMS = 6;   // 每個分類的按鈕上限，維持 3×2 大按鈕
 
 const APP_COLOR = "#2BB3A3", APP_ON = "#06201D";
 const DEFAULT_APPS = [];
@@ -313,28 +346,24 @@ const HINT = {
 const needsValue = a => !((a.type==="youtube" && a.sub==="home") || (a.type==="line" && a.sub==="open"));
 
 const DEFAULTS = {
-  settings:{speech:true, voiceURI:"", rate:0.9, overlaySec:6, cooldownMs:1200, dwell:false, dwellMs:1500, theme:"dark", restDim:0.3, autoRestMin:0},
+  settings:{speech:true, voiceURI:"", rate:0.9, overlaySec:6, cooldownMs:1200, dwell:false, dwellMs:1500, theme:"dark", restDim:0.3, autoRestMin:0, metrics:true},
   apps: DEFAULT_APPS,
   categories:[
     {id:"urgent", name:"緊急", icon:"🚨", color:"#E5484D", on:"#FFFFFF", items:[
-      {icon:"😮‍💨", text:"呼吸困難"}, {icon:"🫧", text:"請幫我抽痰"}, {icon:"😣", text:"我很痛"},
-      {icon:"🤢", text:"我想吐"}, {icon:"💓", text:"心跳不舒服"}, {icon:"😵", text:"我頭暈"},
-      {icon:"😷", text:"呼吸器面罩要調整"}, {icon:"🌡️", text:"我好像發燒了"}, {icon:"🆘", text:"很不舒服，請快來"}
+      {icon:"😮‍💨", text:"呼吸困難"}, {icon:"🫧", text:"請幫我抽痰"}, {icon:"😷", text:"呼吸器面罩要調整"},
+      {icon:"🤢", text:"我想吐"}, {icon:"😣", text:"我很痛"}, {icon:"🆘", text:"很不舒服，請快來"}
     ]},
     {id:"body", name:"身體", icon:"🛏️", color:"#E8A33A", on:"#1B1407", items:[
-      {icon:"🔄", text:"請幫我翻身"}, {icon:"👄", text:"嘴巴好乾"}, {icon:"🚽", text:"我要大小便"},
-      {icon:"🧷", text:"請幫我換尿布"}, {icon:"🥶", text:"我好冷"}, {icon:"🥵", text:"我好熱"},
-      {icon:"🤏", text:"身體好癢"}, {icon:"👁️", text:"眼睛乾，請點眼藥"}, {icon:"🧻", text:"請幫我擦口水"}
+      {icon:"🔄", text:"請幫我翻身"}, {icon:"🧻", text:"請幫我擦口水"}, {icon:"🚽", text:"我要大小便"},
+      {icon:"🧷", text:"請幫我換尿布"}, {icon:"👁️", text:"眼睛乾，請點眼藥"}, {icon:"👄", text:"嘴巴好乾"}
     ]},
     {id:"adjust", name:"調整", icon:"🛠️", color:"#4C9BE0", on:"#0D1B2A", items:[
-      {icon:"⬆️", text:"床頭調高一點"}, {icon:"⬇️", text:"床頭調低一點"}, {icon:"🛌", text:"請調整枕頭"},
-      {icon:"🦵", text:"請幫我移動腳"}, {icon:"✋", text:"請幫我移動手"}, {icon:"💡", text:"請開燈或關燈"},
-      {icon:"📺", text:"請開電視或關電視"}, {icon:"🌬️", text:"想通風，請開窗"}, {icon:"📱", text:"請調整平板位置"}
+      {icon:"📱", text:"請調整平板位置"}, {icon:"🛌", text:"請調整枕頭"}, {icon:"⬆️", text:"床頭調高一點"},
+      {icon:"⬇️", text:"床頭調低一點"}, {icon:"✋", text:"請幫我移動手"}, {icon:"🦵", text:"請幫我移動腳"}
     ]},
     {id:"feel", name:"心情", icon:"💬", color:"#9B7BEA", on:"#140B26", items:[
-      {icon:"🙏", text:"謝謝你"}, {icon:"⏳", text:"請等我一下"}, {icon:"😴", text:"我想休息"},
-      {icon:"🤗", text:"請陪我一下"}, {icon:"👍", text:"我很好"}, {icon:"😢", text:"我很難過"},
-      {icon:"❤️", text:"我愛你"}, {icon:"📞", text:"我想跟家人說話"}, {icon:"❓", text:"我有問題想問"}
+      {icon:"⏳", text:"請等我一下"}, {icon:"❓", text:"我有問題想問"}, {icon:"🙏", text:"謝謝你"},
+      {icon:"❤️", text:"我愛你"}, {icon:"🤗", text:"請陪我一下"}, {icon:"📞", text:"我想跟家人說話"}
     ]}
   ]
 };
@@ -346,6 +375,19 @@ const QUICK = [
 
 /* ---------- 儲存 ---------- */
 const clone = o => JSON.parse(JSON.stringify(o));
+const OLD_DEFAULT_TEXTS = [
+  "呼吸困難|請幫我抽痰|我很痛|我想吐|心跳不舒服|我頭暈|呼吸器面罩要調整|我好像發燒了|很不舒服，請快來",
+  "請幫我翻身|嘴巴好乾|我要大小便|請幫我換尿布|我好冷|我好熱|身體好癢|眼睛乾，請點眼藥|請幫我擦口水",
+  "床頭調高一點|床頭調低一點|請調整枕頭|請幫我移動腳|請幫我移動手|請開燈或關燈|請開電視或關電視|想通風，請開窗|請調整平板位置",
+  "謝謝你|請等我一下|我想休息|請陪我一下|我很好|我很難過|我愛你|我想跟家人說話|我有問題想問"
+];
+function migrateCategories(cats){
+  // 只替換「完全沒改過」的分類，照顧者自訂過的內容保留
+  return cats.map((c, i) => {
+    const same = OLD_DEFAULT_TEXTS[i] && c.id === DEFAULTS.categories[i].id && c.items.map(x => x.text).join("|") === OLD_DEFAULT_TEXTS[i];
+    return same ? clone(DEFAULTS.categories[i]) : c;
+  });
+}
 let state = load();
 let logItems = loadLog();
 function load(){
@@ -353,7 +395,7 @@ function load(){
     const raw = localStorage.getItem(KEY);
     if(raw){
       const s = JSON.parse(raw);
-      if(s && Array.isArray(s.categories)) return {settings:{...DEFAULTS.settings, ...s.settings}, categories:s.categories, apps:Array.isArray(s.apps) ? s.apps : clone(DEFAULT_APPS)};
+      if(s && Array.isArray(s.categories)) return {settings:{...DEFAULTS.settings, ...s.settings}, categories:migrateCategories(s.categories), apps:Array.isArray(s.apps) ? s.apps : clone(DEFAULT_APPS)};
     }
   }catch(e){}
   return clone(DEFAULTS);
@@ -382,13 +424,13 @@ function cancelDwell(){
   clearTimeout(dwellTimer); dwellEl = null;
 }
 function bindTarget(el, fn){
-  el.addEventListener("click", () => { cancelDwell(); if(canFire(el)){ lastAct = Date.now(); fn(); } });
+  el.addEventListener("click", e => { cancelDwell(); const ok = canFire(el); mSelect(el, e, ok); if(ok){ lastAct = Date.now(); fn(); } });
   el.addEventListener("pointerenter", () => {
     if(!state.settings.dwell || !canFire(el)) return;
     cancelDwell(); dwellEl = el;
     el.style.setProperty("--dwell", state.settings.dwellMs + "ms");
     void el.offsetWidth; el.classList.add("dwelling");
-    dwellTimer = setTimeout(() => { lastAct = Date.now(); cancelDwell(); if(canFire(el)) fn(); }, state.settings.dwellMs);
+    dwellTimer = setTimeout(() => { lastAct = Date.now(); cancelDwell(); const ok = canFire(el); mSelect(el, {pointerType:"page-dwell"}, ok); if(ok) fn(); }, state.settings.dwellMs);
   });
   el.addEventListener("pointerleave", () => { if(dwellEl === el) cancelDwell(); });
   el.addEventListener("pointercancel", () => { if(dwellEl === el) cancelDwell(); });
@@ -507,6 +549,7 @@ function beep(){
 /* ---------- 顯示需求 ---------- */
 function activate(msg){
   current = msg; overlayOpen = true; overlayReadyAt = Date.now() + 800;
+  mOverlayOpen(msg);
   cancelDwell();
   overlay.style.setProperty("--cat", msg.color);
   $("ovIco").textContent = msg.icon || "";
@@ -537,8 +580,9 @@ function activate(msg){
   }
   if(!msg.launch) logItems.unshift({t: now.toISOString(), text: msg.text}); logItems = logItems.slice(0,50); saveLog();
 }
-function closeOverlay(){
+function closeOverlay(reason){
   if(!overlayOpen) return;
+  mOverlayClose(typeof reason === "string" ? reason : "auto");
   overlayOpen = false; cancelDwell();
   clearTimeout(overlayTimer); clearInterval(alarmTimer);
   try{ speechSynthesis.cancel(); }catch(e){}
@@ -549,7 +593,7 @@ function closeOverlay(){
 }
 bindTarget($("ovRepeat"), () => {
   if(!current) return;
-  if(current.launch){ closeOverlay(); return; }
+  if(current.launch){ closeOverlay("cancel"); return; }
   speak(current.say || current.text);
   if(!current.alarm){ // 重新計時
     clearTimeout(overlayTimer);
@@ -564,11 +608,11 @@ bindTarget($("ovDone"), () => {
   if(current && current.launch){
     const ok = openLink(current.launch);
     logItems.unshift({t: new Date().toISOString(), text: "開啟 App：" + current.text}); saveLog();
-    closeOverlay();
+    closeOverlay("open");
     if(!ok) toast("這個畫面無法開啟其他 App");
     return;
   }
-  closeOverlay();
+  closeOverlay("done");
 });
 
 /* ---------- 時間、螢幕常亮 ---------- */
@@ -606,6 +650,7 @@ function openSettings(){
   $("sCooldown").value = s.cooldownMs; $("sDwell").checked = s.dwell; $("sDwellMs").value = s.dwellMs;
   $("sRestDim").value = s.restDim; $("sAutoRest").value = String(s.autoRestMin);
   loadVoices(); updateVals(); renderThemeSeg(); renderEditCats(); renderEditList(); renderAppList(); renderLog();
+  $("sMetrics").checked = state.settings.metrics !== false; renderMetrics();
   $("settings").hidden = false;
 }
 $("closeSettings").addEventListener("click", () => { $("settings").hidden = true; renderTabs(); renderBoard(); });
@@ -673,11 +718,11 @@ function renderEditList(){
     del.addEventListener("click", () => { if(confirm(`刪除「${it.text}」？`)){ items.splice(i,1); save(); renderEditList(); } });
     row.append(em, tx, up, play, del); list.appendChild(row);
   });
-  $("addItem").disabled = items.length >= MAX_ITEMS;
+  $("addItem").disabled = items.length >= MAX_CAT_ITEMS;
 }
 $("addItem").addEventListener("click", () => {
   const items = state.categories[editCat].items;
-  if(items.length >= MAX_ITEMS) return;
+  if(items.length >= MAX_CAT_ITEMS) return;
   items.push({icon:"💬", text:"新的需求"}); save(); renderEditList();
   const inputs = $("editList").querySelectorAll("input:not(.emoji)"); const last = inputs[inputs.length-1];
   if(last){ last.focus(); last.select(); }
@@ -956,6 +1001,182 @@ $("addApp").addEventListener("click", () => {
   const cards = $("appList").querySelectorAll(".appedit"); const last = cards[cards.length-1];
   if(last){ last.scrollIntoView({block:"center"}); const inp = last.querySelector(".l1 input:not(.emoji)"); if(inp){ inp.focus(); inp.select(); } }
 });
+
+/* ---------- 游標監控 ---------- */
+// 只記錄彙總數值與精簡事件，存在 localStorage，供日後調整停留時間、按鈕大小與版面。
+const M_KEY = KEY + ":metrics", M_CAP = 3000, HEAT_W = 32, HEAT_H = 20;
+const mNew = () => ({v:1, since:Date.now(), gazeMs:0, heat:{}, targets:{}, sel:[], hov:[], ov:[],
+  counts:{gaze:0, touch:0, pageDwell:0, blocked:0, quickClose:0, lookNoSel:0}});
+let MET = (() => { try{ const v = JSON.parse(localStorage.getItem(M_KEY)); if(v && v.v === 1) return v; }catch(e){} return mNew(); })();
+let mDirty = false;
+const mOn = () => state.settings.metrics !== false;
+function mSave(){ if(!mDirty) return; mDirty = false; try{ localStorage.setItem(M_KEY, JSON.stringify(MET)); }catch(e){} }
+setInterval(mSave, 10000);
+document.addEventListener("visibilitychange", () => { if(document.visibilityState === "hidden") mSave(); });
+const mPush = (arr, row) => { arr.push(row); if(arr.length > M_CAP) arr.splice(0, arr.length - M_CAP); };
+
+function targetKey(el){
+  const area = el.closest("#overlay") ? "需求畫面" : el.closest("#rest") ? "休息" :
+    el.classList.contains("tab") ? "分頁" : el.classList.contains("quick") ? "快速" : el.classList.contains("cell") ? "按鈕" : "其他";
+  const label = (el.textContent || "").replace(/\s+/g, " ").trim().slice(0, 16);
+  return `${area}：${label}`;
+}
+function tAgg(k){ return MET.targets[k] || (MET.targets[k] = {sel:0, hov:0, hovMs:0, dwSum:0, dwN:0, blocked:0, look:0, jitSum:0, jitN:0}); }
+
+// 游標位置 → 熱點格子；時間依停留長度累加（眼動游標靜止時不會觸發事件，所以用計時器補）
+let mPos = null, mLastMove = 0, mLastAcc = 0, mHover = null;
+function heatGrid(){
+  const o = matchMedia("(orientation:portrait)").matches ? "P" : "L";
+  return MET.heat[o] || (MET.heat[o] = {w:HEAT_W, h:HEAT_H, ms:new Array(HEAT_W*HEAT_H).fill(0)});
+}
+function mAccumulate(now){
+  if(!mPos || !mOn()) { mLastAcc = now; return; }
+  const dt = Math.min(now - mLastAcc, 1000);
+  mLastAcc = now;
+  if(dt <= 0 || now - mLastMove > 5000 || document.visibilityState !== "visible") return;
+  const g = heatGrid();
+  const cx = Math.min(g.w - 1, Math.max(0, Math.floor(mPos.x / innerWidth * g.w)));
+  const cy = Math.min(g.h - 1, Math.max(0, Math.floor(mPos.y / innerHeight * g.h)));
+  g.ms[cy * g.w + cx] += dt; MET.gazeMs += dt; mDirty = true;
+}
+setInterval(() => mAccumulate(Date.now()), 250);
+
+function mHoverEnd(selected){
+  const h = mHover; mHover = null;
+  if(!h || !mOn()) return;
+  const dur = Date.now() - h.t0;
+  if(dur < 80 && !selected) return; // 只是掃過
+  const sel = selected || h.selected;
+  const jit = h.n > 2 ? Math.sqrt(Math.max(0, h.sxx/h.n - (h.sx/h.n)**2) + Math.max(0, h.syy/h.n - (h.sy/h.n)**2)) : null;
+  const a = tAgg(h.k);
+  a.hov++; a.hovMs += dur;
+  if(jit !== null){ a.jitSum += jit; a.jitN++; }
+  if(!sel && dur >= 600 && h.ready){ a.look++; MET.counts.lookNoSel++; } // 冷卻或畫面切換中開始的停留不算
+  mPush(MET.hov, [h.t0, h.k, dur, sel ? 1 : 0, jit === null ? null : Math.round(jit)]);
+  mDirty = true;
+}
+document.addEventListener("pointermove", e => {
+  if(e.pointerType === "touch") return;
+  const now = Date.now(); mAccumulate(now);
+  mPos = {x:e.clientX, y:e.clientY}; mLastMove = now;
+  // 停留的前 300ms 是視線移入，不算晃動
+  if(mHover && now - mHover.t0 > 300){ mHover.n++; mHover.sx += e.clientX; mHover.sy += e.clientY; mHover.sxx += e.clientX**2; mHover.syy += e.clientY**2; }
+}, {passive:true});
+document.addEventListener("pointerover", e => {
+  if(e.pointerType === "touch") return;
+  const t = e.target.closest && e.target.closest(".target");
+  if(mHover && mHover.el === t) return;
+  mHoverEnd(false);
+  if(t) mHover = {el:t, k:targetKey(t), t0:Date.now(), n:0, sx:0, sy:0, sxx:0, syy:0, selected:false, ready:canFire(t)};
+}, {passive:true});
+document.addEventListener("pointerout", e => {
+  if(!mHover || e.pointerType === "touch") return;
+  if(e.relatedTarget && mHover.el.contains(e.relatedTarget)) return;
+  if(e.target.closest && e.target.closest(".target") === mHover.el) mHoverEnd(false);
+}, {passive:true});
+
+function mSelect(el, e, ok){
+  if(!mOn()) return;
+  const now = Date.now(), k = targetKey(el), a = tAgg(k);
+  const pt = e && e.pointerType;
+  const via = pt === "touch" ? "touch" : pt === "page-dwell" ? "pageDwell" : "gaze";
+  let dwell = null;
+  if(via !== "touch" && mHover && mHover.el === el){ dwell = now - mHover.t0; mHover.selected = ok; }
+  if(ok){
+    a.sel++; MET.counts[via]++;
+    if(dwell !== null){ a.dwSum += dwell; a.dwN++; }
+  }else{ a.blocked++; MET.counts.blocked++; }
+  mPush(MET.sel, [now, k, via, dwell, ok ? 1 : 0]);
+  mDirty = true;
+}
+let mOv = null;
+function mOverlayOpen(msg){ mOv = {t:Date.now(), k:(msg.launch ? "開啟：" : "") + String(msg.text || "").slice(0, 20), alarm:!!msg.alarm}; }
+function mOverlayClose(how){
+  if(!mOv || !mOn()){ mOv = null; return; }
+  const dur = Date.now() - mOv.t;
+  const quick = (how === "done" || how === "cancel") && dur < 1500 + 800 && !mOv.alarm;
+  if(quick) MET.counts.quickClose++;
+  mPush(MET.ov, [mOv.t, mOv.k, dur, how, quick ? 1 : 0]);
+  mOv = null; mDirty = true;
+}
+
+/* ---------- 監控數據：設定頁摘要 ---------- */
+function median(arr){ if(!arr.length) return null; const a = arr.slice().sort((x,y) => x-y), m = a.length >> 1; return a.length % 2 ? a[m] : (a[m-1] + a[m]) / 2; }
+const sec = ms => ms === null || ms === undefined ? "—" : (ms/1000).toFixed(1) + " 秒";
+function mTable(head, rows){
+  const t = document.createElement("table"); t.className = "mtable";
+  const tr = document.createElement("tr");
+  head.forEach((h,i) => { const th = document.createElement("th"); th.textContent = h; if(i > 0) th.className = "n"; tr.appendChild(th); });
+  t.appendChild(tr);
+  rows.forEach(r => { const tr2 = document.createElement("tr"); r.forEach((c,i) => { const td = document.createElement("td"); td.textContent = c; if(i > 0) td.className = "n"; tr2.appendChild(td); }); t.appendChild(tr2); });
+  const w = document.createElement("div"); w.className = "mscroll"; w.appendChild(t); return w;
+}
+function renderMetrics(){
+  const box = $("mSummary"); box.textContent = "";
+  const c = MET.counts;
+  const dws = MET.sel.filter(r => r[4] === 1 && r[3] !== null && r[2] !== "touch").map(r => r[3]);
+  const jits = MET.hov.filter(r => r[4] !== null).map(r => r[4]);
+  const days = Math.max(1, Math.ceil((Date.now() - MET.since) / 86400000));
+  const d = new Date(MET.since);
+  box.appendChild(mTable(["項目", "數值"], [
+    ["收集期間", `${d.getMonth()+1}/${d.getDate()} 起，共 ${days} 天`],
+    ["游標活動時間", MET.gazeMs < 60000 ? `${Math.round(MET.gazeMs / 1000)} 秒` : `${Math.round(MET.gazeMs / 60000)} 分鐘`],
+    ["選取次數（眼控／頁面凝視／觸控）", `${c.gaze}／${c.pageDwell}／${c.touch}`],
+    ["選取時間（平均／中位數）", dws.length ? `${sec(dws.reduce((a,b) => a+b, 0)/dws.length)}／${sec(median(dws))}` : "—"],
+    ["防誤觸擋下的點擊", String(c.blocked)],
+    ["看了沒選", String(c.lookNoSel)],
+    ["需求畫面快速關閉", String(c.quickClose)],
+    ["游標晃動幅度（中位數）", jits.length ? `${Math.round(median(jits))} px` : "—"]
+  ]));
+  const rows = Object.entries(MET.targets)
+    .sort((a,b) => (b[1].sel + b[1].look) - (a[1].sel + a[1].look)).slice(0, 15)
+    .map(([k,a]) => [k, String(a.sel), a.dwN ? sec(a.dwSum/a.dwN) : "—", String(a.look), String(a.blocked)]);
+  if(rows.length) box.appendChild(mTable(["按鈕", "選取", "平均選取時間", "看了沒選", "被擋下"], rows));
+}
+$("sMetrics").addEventListener("change", e => { state.settings.metrics = e.target.checked; save(); if(!e.target.checked) mHover = null; });
+$("mClear").addEventListener("click", () => {
+  if(!confirm("清除所有游標監控數據？")) return;
+  MET = mNew(); mDirty = true; mSave(); renderMetrics(); toast("已清除監控數據");
+});
+function exportFile(name, data, type){ return saveFile(name, data, type); }
+$("mExport").addEventListener("click", () => {
+  mSave();
+  const s = state.settings;
+  const out = {
+    exportedAt: new Date().toISOString(),
+    device: {w: innerWidth, h: innerHeight, dpr: devicePixelRatio, ua: navigator.userAgent},
+    settings: {dwell: s.dwell, dwellMs: s.dwellMs, cooldownMs: s.cooldownMs, overlaySec: s.overlaySec},
+    columns: {sel:["時間","按鈕","方式","選取時間ms","成功"], hov:["開始","按鈕","停留ms","有選取","晃動px"], ov:["開啟","內容","持續ms","關閉方式","快速關閉"]},
+    ...MET
+  };
+  const d = new Date();
+  exportFile(`游標監控_${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}.json`, JSON.stringify(out), "application/json");
+});
+
+/* ---------- 注視熱點圖 ---------- */
+function showHeat(){
+  $("settings").hidden = true; renderTabs(); renderBoard();
+  const g = heatGrid(), cv = $("heatCanvas");
+  const dpr = devicePixelRatio || 1;
+  cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
+  const ctx = cv.getContext("2d"); ctx.scale(dpr, dpr); ctx.clearRect(0, 0, innerWidth, innerHeight);
+  const max = Math.max(...g.ms);
+  const cw = innerWidth / g.w, ch = innerHeight / g.h;
+  if(max > 0){
+    for(let y = 0; y < g.h; y++) for(let x = 0; x < g.w; x++){
+      const v = g.ms[y*g.w + x]; if(!v) continue;
+      const r = Math.sqrt(v / max);
+      const hue = 50 - 50 * r;
+      ctx.fillStyle = `hsla(${hue}, 95%, 52%, ${0.18 + 0.62 * r})`;
+      ctx.fillRect(x*cw, y*ch, cw + .5, ch + .5);
+    }
+  }
+  const total = g.ms.reduce((a,b) => a+b, 0);
+  $("heatInfo").textContent = max ? `顏色越紅代表游標停留越久（${matchMedia("(orientation:portrait)").matches ? "直向" : "橫向"}，共 ${total < 60000 ? Math.round(total/1000) + " 秒" : Math.round(total/60000) + " 分鐘"}）` : "目前方向還沒有數據";
+  $("heat").hidden = false;
+}
+$("mHeat").addEventListener("click", showHeat);
+$("heatClose").addEventListener("click", () => { $("heat").hidden = true; });
 
 /* ---------- 啟動 ---------- */
 if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
