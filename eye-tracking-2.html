@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" data-board="dark">
+<head>
+<meta data-own charset="utf-8">
+<meta data-own name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta data-own name="apple-mobile-web-app-capable" content="yes">
+<meta data-own name="mobile-web-app-capable" content="yes">
+<meta data-own name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta data-own name="apple-mobile-web-app-title" content="眼動溝通板">
+<meta data-own name="theme-color" content="#14202C">
+<link data-own rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOmQ4ODkxZjU3LTJmZjMtNGY5NS1iMDIzLTFjZTg5YTE3OGE1MQAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNog0KzpgHhH9P2peBB9hmcxwAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6NzBkYzVmYmItNmZkNy00NjEzLTk5ZTUtMTQ3ZTMwNjgzOTVhbHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaEf2d+ttdhUGonP9euoYOncAAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYICKSEUtLqDwhH/f6UFCCmuQPvcTgx87GAUjDuaaeGFGRpGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2jXbtyAG6t/NskLqsZ1+np8AAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFggJNvojjnWDTO2rd00l9CVHm147SiAZHljke+6BNsMkwFkbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTpkODg5MWY1Ny0yZmYzLTRmOTUtYjAyMy0xY2U4OWExNzhhNTEvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDpmZjBiN2QwZS02NmI5LTRjNWEtYWY3My1kZjQ1MTA5MDYzYjJyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggIpIRS0uoPCEf9/pQUIKa5A+9xODHzsYBSMO5pp4YUZGiY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIDmwSgRBS1ZdQqcc5nsWUT+/HEXxWhURlzKbuMnUZznAomN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIDk45gaKjHBe11vdI4DUotVmGQ7uqrG8b5bLHeFWueB5dGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2WEDFZuVicFjjaRKFL35XzH1T42Zrsaz7EBiqm1jpYBgOUO1DMLWIl7kxOp4aIfdMMNkxxrKX/8tIHTNv1yxCg8mrqnLuSgAABEFJREFUeJzt3TuO1EAURmEPYgkkZJAiMhIWwQYQSyFmKYgNsAiSSSedkG0QWLJa7fmbdrnq1n2cL0QD7bEPVbbbj4c37z4uwEtezV4A+EUckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5Ir2cvgKnnp8eT/8L7D5+6LEkIDylfHXo+gqNSRpMkDvsabsvRSuA4vAWhxA0lXhxRmtgLV0mYOOI2sRelEu9xZGpiz3klTuPI3cSez0rcxVEti0veEnEUx5Qsvv78e/sHfn17a7MkGz+JuIjDPov/NrFnXImHRCbHYZxFQxN7lpXMTWRmHJZldMniklkiE/uYE0fEAWMv/RAyIY7QA8Ze4iHE+nqOZGWYfcoyY7fdNI58ZRh/lnEfRtNKjp2M2/LtgliMHBXKMP5cm1U6PI4iZdh/usGKHRtHqTLsl2H06uXqc0gD4yg4bKzSDB6j4ihbxipHH0PuWwl3TcafH1+u/uTz999TlqTN89PjiIPbIec5ogwb+yb2zlQS/cxH/2klyrBxTxn3/9h0I1Z70aOVQ5s8Sh/ddY4jxDVdDRu7rQ/j3eTuK7/cyNE8DBQcP2rFcXIDV+sjdhzeTm/s+V/CG3rGEeU4JbG+myD2yHFIl0mh1MxSKA4cRRyQiAMScUAiDkiF4ujyLXysr/JP6hmHhxvDi+u7CQqNHDgqdhxHr6Y5OSk0/HX7Z790FDuOBs19lNrbWHWOI8RuR8NmDlFG95UffuRoG7cPbezmMkLPKcuIOEIMHsvdmzzEmLGMWe21XqlxZdvw0W9NGGTUIxii3J0wTvT7EpZx+xxRJpcExq3qgTukln142/XL8aCw8EcrGz99+FmSk8bGweQy1OjVO3zkqDa55JhQVhbTSp0+MpWxGD+k1uz4NvHTBC3/p5nukJr9YvbjR74yFvujlZR9pCxjmXIom6yPrGUsRV6pEfqtCRNPB8w8CRZ6CElfxjL9TU2rWENIhSxWLuJYOX+nQrJzGPdwFMfK23f9Cb55b+YujlW1R314y2LlNI5N7kp8NrHxHscmUyXOm9iEiWMTt5IoTWzixbGJUkm4JjaB47jkLZS4QVxKEscV+1Zy1HAlZxzK+WhSRqDUigOH5Ln6HN0RByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgD0j/8Kj51DQfldgAAAABJRU5ErkJggg==">
+<title data-own>眼動溝通板</title>
+<style data-own>
+:root{
+  --bg:#14202C; --surface:#1F3042; --surface-2:#2A4058; --text:#F3F6F9; --muted:#A3B3C4; --line:#35506B;
+  --yes:#2A9B71; --no:#C4651F; --call:#D63B3B;
+  --gap:clamp(10px,1.5vw,20px); --radius:22px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: light){ :root[data-board="auto"]:not([data-theme="dark"]){
+  --bg:#E6ECF2; --surface:#FFFFFF; --surface-2:#EEF3F8; --text:#13202C; --muted:#56687A; --line:#C3D0DC;
+} }
+:root[data-board="auto"][data-theme="dark"]{
+  --bg:#14202C; --surface:#1F3042; --surface-2:#2A4058; --text:#F3F6F9; --muted:#A3B3C4; --line:#35506B;
+}
+:root[data-board="light"],:root[data-board="auto"][data-theme="light"]{
+  --bg:#E6ECF2; --surface:#FFFFFF; --surface-2:#EEF3F8; --text:#13202C; --muted:#56687A; --line:#C3D0DC;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  background:var(--bg); color:var(--text); overflow:hidden; overscroll-behavior:none;
+  font-family:"PingFang TC","Heiti TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+  -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+
+/* ---------- 主版面 ---------- */
+.app{
+  height:100%; display:grid; gap:var(--gap); padding:var(--gap);
+  padding-left:max(var(--gap),env(safe-area-inset-left,0px)); padding-right:max(var(--gap),env(safe-area-inset-right,0px));
+  grid-template-columns:1fr minmax(170px,21vw);
+  grid-template-rows:auto 1fr;
+  grid-template-areas:"top top" "board side";
+}
+@media (orientation:portrait){
+  .app{grid-template-columns:1fr; grid-template-rows:auto 1fr auto; grid-template-areas:"top" "board" "side"}
+}
+.top{grid-area:top; display:flex; gap:var(--gap); align-items:stretch}
+.tabs{flex:1; display:flex; gap:var(--gap)}
+.tab{
+  flex:1; min-height:clamp(64px,9vh,96px); border:0; border-radius:var(--radius);
+  background:var(--surface); box-shadow:inset 0 -8px 0 var(--cat);
+  display:flex; align-items:center; justify-content:center; gap:.4em;
+  font-size:clamp(1.2rem,2.4vw,2rem); font-weight:700;
+}
+.tab[aria-selected="true"]{background:var(--cat); color:var(--on-cat); box-shadow:none}
+.meta{display:flex; flex-direction:column; align-items:flex-end; justify-content:space-between; min-width:7.5em}
+.clock{font-size:clamp(1rem,1.6vw,1.35rem); color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap}
+.gear{
+  position:relative; border:1px solid var(--line); background:transparent; color:var(--muted);
+  border-radius:14px; padding:.35em .7em; font-size:.95rem; overflow:hidden; white-space:nowrap;
+}
+.gear::after{content:""; position:absolute; inset:auto 0 0 0; height:4px; background:var(--text); transform:scaleX(0); transform-origin:left}
+.gear.holding::after{transform:scaleX(1); transition:transform 1.2s linear}
+
+.board{grid-area:board; display:grid; gap:var(--gap); min-height:0}
+.side{grid-area:side; display:grid; gap:var(--gap); grid-template-rows:1fr 1fr 1.25fr}
+@media (orientation:portrait){ .side{grid-template-rows:none; grid-template-columns:1fr 1fr 1.25fr; height:clamp(110px,15vh,170px)} }
+
+.target{position:relative; overflow:hidden; border:0; border-radius:var(--radius); min-width:0; min-height:0}
+.target::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:12px;
+  background:var(--cat,var(--text)); transform:scaleX(0); transform-origin:left; pointer-events:none;
+}
+.target.quick::after,.target.on-fill::after{background:rgba(255,255,255,.85)}
+.target.dwelling::after{transform:scaleX(1); transition:transform var(--dwell,1500ms) linear}
+.target:focus-visible{outline:4px solid var(--text); outline-offset:3px}
+
+.cell{
+  background:var(--surface); box-shadow:inset 0 10px 0 var(--cat);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.15em; padding:.6em .4em .4em;
+}
+.cell:active{background:var(--surface-2)}
+.cell .ico{font-size:clamp(2rem,5.2vh,3.6rem); line-height:1.1}
+.cell .lbl{font-size:clamp(1.25rem,3.4vh,2.3rem); font-weight:700; line-height:1.25; text-align:center; word-break:keep-all; overflow-wrap:anywhere}
+.cell .sub{font-size:clamp(.85rem,1.9vh,1.15rem); color:var(--muted); font-weight:500; text-align:center}
+
+.quick{color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.1em; font-weight:800}
+.quick .ico{font-size:clamp(1.8rem,4.6vh,3.2rem)}
+.quick .lbl{font-size:clamp(1.6rem,4.4vh,3rem)}
+.q-yes{background:var(--yes)} .q-no{background:var(--no)} .q-call{background:var(--call)}
+
+.cooling .board,.cooling .side,.cooling .tabs{opacity:.4; transition:opacity .2s}
+
+/* ---------- 顯示需求的全螢幕畫面 ---------- */
+.overlay{
+  position:fixed; inset:0; z-index:20; background:var(--bg);
+  box-shadow:inset 0 0 0 clamp(14px,2.2vw,26px) var(--cat);
+  display:grid; grid-template-rows:1fr auto; padding:calc(clamp(14px,2.2vw,26px) + var(--gap));
+  padding-top:calc(clamp(14px,2.2vw,26px) + var(--gap) + env(safe-area-inset-top,0px));
+  padding-bottom:calc(clamp(14px,2.2vw,26px) + var(--gap) + env(safe-area-inset-bottom,0px));
+}
+.overlay[hidden]{display:none}
+.ov-msg{display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:.2em}
+.ov-ico{font-size:clamp(4rem,14vh,9rem); line-height:1}
+.ov-text{font-size:clamp(2.8rem,10vh,7.5rem); font-weight:800; line-height:1.15; max-width:16em}
+.ov-time{color:var(--muted); font-size:clamp(1rem,2.2vh,1.4rem); margin-top:.6em}
+.ov-actions{display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); height:clamp(96px,17vh,170px)}
+.ov-btn{background:var(--surface); font-size:clamp(1.5rem,4vh,2.5rem); font-weight:700; display:flex; align-items:center; justify-content:center; gap:.4em}
+.ov-done{background:var(--text); color:var(--bg)}
+.ov-done::after{background:var(--bg) !important}
+.countdown{position:absolute; --f:clamp(14px,2.2vw,26px); left:var(--f); right:var(--f); bottom:calc(var(--f) + env(safe-area-inset-bottom,0px)); height:6px; background:var(--muted); transform-origin:left}
+.alarm{animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:inset 0 0 0 clamp(26px,4vw,48px) var(--cat)}}
+@media (prefers-reduced-motion:reduce){.alarm{animation:none}.target.dwelling::after,.gear.holding::after{transition-duration:1ms}}
+
+/* ---------- 照顧者設定 ---------- */
+.sheet{position:fixed; inset:0; z-index:30; background:var(--bg); overflow-y:auto; -webkit-user-select:text; user-select:text; touch-action:auto}
+.sheet[hidden]{display:none}
+.sheet-head{
+  position:sticky; top:0; z-index:1; background:var(--bg); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:calc(14px + env(safe-area-inset-top,0px)) 24px 14px;
+}
+.sheet-head h1{font-size:1.5rem; margin:0}
+.sheet-body{max-width:860px; margin:0 auto; padding:8px 24px 64px}
+.sheet h2{font-size:1.15rem; margin:30px 0 10px}
+.row{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid var(--line); font-size:1.05rem}
+.row small{display:block; color:var(--muted); font-size:.88rem; margin-top:2px}
+.row input[type=range]{width:min(260px,40vw)}
+.row select,.edit input,.btn{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:.55em .8em}
+.btn{font-weight:600}
+.btn-primary{background:var(--text); color:var(--bg); border-color:var(--text)}
+.btn-danger{color:var(--call)}
+.seg{display:flex; gap:8px; flex-wrap:wrap}
+.seg .btn[aria-pressed="true"]{background:var(--text); color:var(--bg)}
+.edit{display:grid; grid-template-columns:4.2em 1fr auto auto auto; gap:8px; align-items:center; margin:8px 0}
+.edit input.emoji{text-align:center; font-size:1.4rem; padding:.3em}
+.appedit{border:1px solid var(--line); border-radius:16px; padding:12px; margin:12px 0; display:grid; gap:8px}
+.appedit .l1{display:grid; grid-template-columns:4.2em 1fr; gap:8px}
+.appedit .l2{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px}
+.appedit input,.appedit select{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:.55em .8em; width:100%}
+.appedit input.emoji{text-align:center; font-size:1.4rem; padding:.3em}
+.appedit .l4{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.appedit .url{flex:1 1 220px; color:var(--muted); font-size:.85rem; overflow-wrap:anywhere}
+.appedit .url.bad{color:var(--call)}
+.actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+.log{list-style:none; padding:0; margin:0; font-size:1rem}
+.log li{display:flex; gap:14px; padding:8px 0; border-bottom:1px solid var(--line)}
+.log time{color:var(--muted); font-variant-numeric:tabular-nums; min-width:9em}
+.note{color:var(--muted); font-size:.92rem; line-height:1.6}
+input[type=checkbox]{width:28px; height:28px}
+
+.toast{
+  position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%);
+  background:var(--text); color:var(--bg); padding:.7em 1.2em; border-radius:14px; font-size:1.05rem; z-index:40;
+  opacity:0; pointer-events:none; transition:opacity .2s;
+}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div data-own class="app" id="app">
+  <header class="top">
+    <nav class="tabs" id="tabs" role="tablist" aria-label="需求分類"></nav>
+    <div class="meta">
+      <div class="clock" id="clock"></div>
+      <button class="gear" id="gear" aria-label="設定（照顧者長按開啟）">⚙︎ 長按設定</button>
+    </div>
+  </header>
+  <main class="board" id="board" aria-live="polite"></main>
+  <aside class="side" id="side" aria-label="快速回應"></aside>
+</div>
+
+<section data-own class="overlay" id="overlay" hidden aria-modal="true" role="dialog">
+  <div class="ov-msg">
+    <div class="ov-ico" id="ovIco"></div>
+    <div class="ov-text" id="ovText"></div>
+    <div class="ov-time" id="ovTime"></div>
+  </div>
+  <div class="ov-actions">
+    <button class="target ov-btn" id="ovRepeat">🔊 再說一次</button>
+    <button class="target ov-btn ov-done" id="ovDone">✓ 完成</button>
+  </div>
+  <div class="countdown" id="countdown"></div>
+</section>
+
+<section data-own class="sheet" id="settings" hidden aria-label="設定">
+  <div class="sheet-head">
+    <h1>照顧者設定</h1>
+    <button class="btn btn-primary" id="closeSettings">完成</button>
+  </div>
+  <div class="sheet-body">
+    <h2>語音</h2>
+    <div class="row"><label for="sSpeech">選擇後朗讀出聲</label><input type="checkbox" id="sSpeech"></div>
+    <div class="row"><label for="sVoice">聲音</label><select id="sVoice"></select></div>
+    <div class="row"><label for="sRate">語速 <small id="sRateVal"></small></label><input type="range" id="sRate" min="0.5" max="1.4" step="0.05"></div>
+
+    <h2>選擇與防誤觸</h2>
+    <div class="row"><label for="sOverlay">需求畫面停留秒數<small>「呼叫照顧者」會持續提醒，直到按完成</small></label><span><input type="range" id="sOverlay" min="3" max="20" step="1"> <b id="sOverlayVal"></b></span></div>
+    <div class="row"><label for="sCooldown">完成後暫停選擇<small>避免視線停在原處時連續觸發</small></label><span><input type="range" id="sCooldown" min="300" max="4000" step="100"> <b id="sCooldownVal"></b></span></div>
+    <div class="row"><label for="sDwell">頁面內凝視選擇<small>只在系統「停留控制」關閉、而游標停留能被頁面偵測時開啟</small></label><input type="checkbox" id="sDwell"></div>
+    <div class="row"><label for="sDwellMs">凝視選擇時間</label><span><input type="range" id="sDwellMs" min="600" max="4000" step="100"> <b id="sDwellMsVal"></b></span></div>
+
+    <h2>外觀</h2>
+    <div class="row"><span>畫面</span><div class="seg" id="sTheme">
+      <button class="btn" data-v="auto">跟隨裝置</button>
+      <button class="btn" data-v="dark">暗色（夜間不刺眼）</button>
+      <button class="btn" data-v="light">亮色</button>
+    </div></div>
+
+    <h2>編輯按鈕</h2>
+    <div class="seg" id="editCats"></div>
+    <div id="editList"></div>
+    <div class="actions"><button class="btn" id="addItem">＋ 新增按鈕</button></div>
+    <p class="note">每個分類最多 12 個按鈕。文字就是朗讀的內容，可以寫成完整句子，例如「請幫我抽痰」。</p>
+
+    <h2>App 捷徑</h2>
+    <p class="note">病人選了 App 按鈕後會先出現確認畫面，再選「開啟」才會跳到該 App。新增後請按「測試」確認能正常開啟。</p>
+    <div id="appList"></div>
+    <div class="actions"><button class="btn" id="addApp">＋ 新增 App 捷徑</button></div>
+    <p class="note">「開啟方式」選 App 會直接叫出已安裝的 App；如果打不開，改成「網頁連結」試試看。LINE 好友頁面打開後，可再選聊天或通話。要回到溝通板，請用眼動追蹤的輔助觸控選單回到主畫面或 App 切換器。</p>
+
+    <h2>最近的需求紀錄</h2>
+    <ul class="log" id="log"></ul>
+    <div class="actions"><button class="btn btn-danger" id="clearLog">清除紀錄</button></div>
+
+    <h2>備份</h2>
+    <div class="actions">
+      <button class="btn" id="offlineBtn">下載離線版（HTML）</button>
+      <button class="btn" id="exportBtn">匯出設定檔</button>
+      <label class="btn" for="importFile">匯入設定檔</label>
+      <input type="file" id="importFile" accept="application/json,.json" hidden>
+      <button class="btn btn-danger" id="resetBtn">還原預設按鈕</button>
+    </div>
+    <p class="note">建議 iPad 設定：輔助使用 → 眼動追蹤（開啟並完成校正、開啟停留控制）；顯示與亮度 → 自動鎖定 → 永不；如果不使用 App 捷徑，可再開啟輔助使用 → 引導使用模式，把畫面鎖在本程式（引導使用模式會擋住其他 App）。</p>
+  </div>
+</section>
+
+<div data-own class="toast" id="toast" role="status"></div>
+
+<script data-own>
+(() => {
+"use strict";
+const PAGE_SRC = document.documentElement.outerHTML;
+const KEY = "gazeboard:v1";
+const MAX_ITEMS = 12;
+
+const APP_COLOR = "#2BB3A3", APP_ON = "#06201D";
+const DEFAULT_APPS = [
+  {icon:"▶️", label:"看 YouTube", type:"youtube", sub:"home", value:"", open:"app"},
+  {icon:"🎵", label:"聽老歌", type:"youtube", sub:"search", value:"懷舊老歌", open:"app"},
+  {icon:"💬", label:"打開 LINE", type:"line", sub:"open", value:"", open:"app"}
+];
+const APP_TYPES = {
+  youtube:{name:"YouTube", subs:{home:"首頁", channel:"指定頻道", video:"指定影片", playlist:"播放清單", search:"搜尋"}, modes:true},
+  line:{name:"LINE", subs:{open:"打開 LINE", friend:"好友頁面", text:"傳送文字"}, modes:true},
+  tel:{name:"打電話"}, facetime:{name:"FaceTime 視訊"}, "facetime-audio":{name:"FaceTime 語音"},
+  sms:{name:"傳簡訊"}, url:{name:"其他 App／網址"}
+};
+const HINT = {
+  "youtube:channel":"頻道網址或 @帳號，例：@channelname",
+  "youtube:video":"影片網址，例：https://youtu.be/xxxxxxxxxxx",
+  "youtube:playlist":"播放清單網址（含 list=）",
+  "youtube:search":"搜尋文字，例：鄧麗君",
+  "line:friend":"好友的 LINE ID，或好友分享的加好友連結",
+  "line:text":"要傳送的文字，開啟後可選擇傳給誰",
+  tel:"電話號碼，例：0912345678", sms:"電話號碼，例：0912345678",
+  facetime:"電話號碼或 Apple 帳號 Email", "facetime-audio":"電話號碼或 Apple 帳號 Email",
+  url:"完整連結，例：https://… 或 spotify://"
+};
+const needsValue = a => !((a.type==="youtube" && a.sub==="home") || (a.type==="line" && a.sub==="open"));
+
+const DEFAULTS = {
+  settings:{speech:true, voiceURI:"", rate:0.9, overlaySec:6, cooldownMs:1200, dwell:false, dwellMs:1500, theme:"dark"},
+  apps: DEFAULT_APPS,
+  categories:[
+    {id:"urgent", name:"緊急", icon:"🚨", color:"#E5484D", on:"#FFFFFF", items:[
+      {icon:"😮‍💨", text:"呼吸困難"}, {icon:"🫧", text:"請幫我抽痰"}, {icon:"😣", text:"我很痛"},
+      {icon:"🤢", text:"我想吐"}, {icon:"💓", text:"心跳不舒服"}, {icon:"😵", text:"我頭暈"},
+      {icon:"😷", text:"呼吸器面罩要調整"}, {icon:"🌡️", text:"我好像發燒了"}, {icon:"🆘", text:"很不舒服，請快來"}
+    ]},
+    {id:"body", name:"身體", icon:"🛏️", color:"#E8A33A", on:"#1B1407", items:[
+      {icon:"🔄", text:"請幫我翻身"}, {icon:"👄", text:"嘴巴好乾"}, {icon:"🚽", text:"我要大小便"},
+      {icon:"🧷", text:"請幫我換尿布"}, {icon:"🥶", text:"我好冷"}, {icon:"🥵", text:"我好熱"},
+      {icon:"🤏", text:"身體好癢"}, {icon:"👁️", text:"眼睛乾，請點眼藥"}, {icon:"🧻", text:"請幫我擦口水"}
+    ]},
+    {id:"adjust", name:"調整", icon:"🛠️", color:"#4C9BE0", on:"#0D1B2A", items:[
+      {icon:"⬆️", text:"床頭調高一點"}, {icon:"⬇️", text:"床頭調低一點"}, {icon:"🛌", text:"請調整枕頭"},
+      {icon:"🦵", text:"請幫我移動腳"}, {icon:"✋", text:"請幫我移動手"}, {icon:"💡", text:"請開燈或關燈"},
+      {icon:"📺", text:"請開電視或關電視"}, {icon:"🌬️", text:"想通風，請開窗"}, {icon:"📱", text:"請調整平板位置"}
+    ]},
+    {id:"feel", name:"心情", icon:"💬", color:"#9B7BEA", on:"#140B26", items:[
+      {icon:"🙏", text:"謝謝你"}, {icon:"⏳", text:"請等我一下"}, {icon:"😴", text:"我想休息"},
+      {icon:"🤗", text:"請陪我一下"}, {icon:"👍", text:"我很好"}, {icon:"😢", text:"我很難過"},
+      {icon:"❤️", text:"我愛你"}, {icon:"📞", text:"我想跟家人說話"}, {icon:"❓", text:"我有問題想問"}
+    ]}
+  ]
+};
+const QUICK = [
+  {cls:"q-yes",  icon:"✅", label:"是", text:"是", color:"#2A9B71"},
+  {cls:"q-no",   icon:"✖️", label:"不是", text:"不是", color:"#C4651F"},
+  {cls:"q-call", icon:"🔔", label:"呼叫", text:"請過來，我需要你", color:"#D63B3B", alarm:true}
+];
+
+/* ---------- 儲存 ---------- */
+const clone = o => JSON.parse(JSON.stringify(o));
+let state = load();
+let logItems = loadLog();
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){
+      const s = JSON.parse(raw);
+      if(s && Array.isArray(s.categories)) return {settings:{...DEFAULTS.settings, ...s.settings}, categories:s.categories, apps:Array.isArray(s.apps) ? s.apps : clone(DEFAULT_APPS)};
+    }
+  }catch(e){}
+  return clone(DEFAULTS);
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+function loadLog(){ try{ return JSON.parse(localStorage.getItem(KEY+":log")) || []; }catch(e){ return []; } }
+function saveLog(){ try{ localStorage.setItem(KEY+":log", JSON.stringify(logItems.slice(0,50))); }catch(e){} }
+
+/* ---------- 元素 ---------- */
+const $ = id => document.getElementById(id);
+const app=$("app"), tabsEl=$("tabs"), boardEl=$("board"), sideEl=$("side"), overlay=$("overlay");
+let catIndex = 0, view = "cat", overlayOpen = false, locked = false, overlayReadyAt = 0;
+let overlayTimer = null, alarmTimer = null, unlockTimer = null, current = null;
+
+/* ---------- 觸發與凝視 ---------- */
+function canFire(el){
+  if($("settings").hidden === false) return false;
+  if(el.closest("#overlay")) return overlayOpen && Date.now() >= overlayReadyAt;
+  return !overlayOpen && !locked;
+}
+let dwellEl = null, dwellTimer = null;
+function cancelDwell(){
+  if(dwellEl) dwellEl.classList.remove("dwelling");
+  clearTimeout(dwellTimer); dwellEl = null;
+}
+function bindTarget(el, fn){
+  el.addEventListener("click", () => { cancelDwell(); if(canFire(el)) fn(); });
+  el.addEventListener("pointerenter", () => {
+    if(!state.settings.dwell || !canFire(el)) return;
+    cancelDwell(); dwellEl = el;
+    el.style.setProperty("--dwell", state.settings.dwellMs + "ms");
+    void el.offsetWidth; el.classList.add("dwelling");
+    dwellTimer = setTimeout(() => { cancelDwell(); if(canFire(el)) fn(); }, state.settings.dwellMs);
+  });
+  el.addEventListener("pointerleave", () => { if(dwellEl === el) cancelDwell(); });
+  el.addEventListener("pointercancel", () => { if(dwellEl === el) cancelDwell(); });
+}
+
+/* ---------- 畫面 ---------- */
+function gridFor(n){
+  let c, r;
+  if(n<=2){c=2;r=1}else if(n<=4){c=2;r=2}else if(n<=6){c=3;r=2}else if(n<=9){c=3;r=3}else{c=4;r=3}
+  if(matchMedia("(orientation:portrait)").matches && c>r) [c,r]=[r,c];
+  return [c,r];
+}
+function renderTabs(){
+  tabsEl.textContent = "";
+  state.categories.forEach((cat,i) => {
+    const b = document.createElement("button");
+    const sel = view==="cat" && i===catIndex;
+    b.className = "target tab" + (sel ? " on-fill" : "");
+    b.setAttribute("role","tab"); b.setAttribute("aria-selected", sel);
+    b.style.setProperty("--cat", cat.color); b.style.setProperty("--on-cat", cat.on);
+    b.innerHTML = '<span aria-hidden="true"></span><span></span>';
+    b.children[0].textContent = cat.icon; b.children[1].textContent = cat.name;
+    bindTarget(b, () => { view = "cat"; catIndex = i; renderTabs(); renderBoard(); });
+    tabsEl.appendChild(b);
+  });
+  const ab = document.createElement("button"), asel = view==="apps";
+  ab.className = "target tab" + (asel ? " on-fill" : "");
+  ab.setAttribute("role","tab"); ab.setAttribute("aria-selected", asel);
+  ab.style.setProperty("--cat", APP_COLOR); ab.style.setProperty("--on-cat", APP_ON);
+  ab.innerHTML = '<span aria-hidden="true">📱</span><span>App</span>';
+  bindTarget(ab, () => { view = "apps"; renderTabs(); renderBoard(); });
+  tabsEl.appendChild(ab);
+}
+function renderBoard(){
+  if(view==="apps"){ renderApps(); return; }
+  const cat = state.categories[catIndex];
+  const [c,r] = gridFor(cat.items.length);
+  boardEl.style.gridTemplateColumns = `repeat(${c},1fr)`;
+  boardEl.style.gridTemplateRows = `repeat(${r},1fr)`;
+  boardEl.textContent = "";
+  if(!cat.items.length){
+    const p = document.createElement("p"); p.className="note";
+    p.textContent = "這個分類還沒有按鈕。照顧者可長按右上角「設定」新增。";
+    boardEl.appendChild(p); return;
+  }
+  cat.items.forEach(item => {
+    const b = document.createElement("button");
+    b.className = "target cell"; b.style.setProperty("--cat", cat.color);
+    b.innerHTML = '<span class="ico" aria-hidden="true"></span><span class="lbl"></span>';
+    b.children[0].textContent = item.icon || ""; b.children[1].textContent = item.text;
+    bindTarget(b, () => activate({icon:item.icon, text:item.text, color:cat.color}));
+    boardEl.appendChild(b);
+  });
+}
+function renderSide(){
+  sideEl.textContent = "";
+  QUICK.forEach(q => {
+    const b = document.createElement("button");
+    b.className = "target quick " + q.cls;
+    b.innerHTML = '<span class="ico" aria-hidden="true"></span><span class="lbl"></span>';
+    b.children[0].textContent = q.icon; b.children[1].textContent = q.label;
+    bindTarget(b, () => activate({icon:q.icon, text:q.text, color:q.color, alarm:q.alarm}));
+    sideEl.appendChild(b);
+  });
+}
+
+/* ---------- 語音與提醒聲 ---------- */
+let voices = [];
+function loadVoices(){
+  if(!("speechSynthesis" in window)) return;
+  voices = speechSynthesis.getVoices().filter(v => /^zh/i.test(v.lang));
+  const sel = $("sVoice"); sel.textContent = "";
+  const auto = new Option("自動（優先台灣中文）", ""); sel.add(auto);
+  voices.forEach(v => sel.add(new Option(`${v.name}（${v.lang}）`, v.voiceURI)));
+  sel.value = state.settings.voiceURI;
+}
+function pickVoice(){
+  if(state.settings.voiceURI){ const v = voices.find(v => v.voiceURI === state.settings.voiceURI); if(v) return v; }
+  return voices.find(v => /zh[-_]TW/i.test(v.lang)) || voices.find(v => /zh/i.test(v.lang)) || null;
+}
+function speak(text){
+  if(!state.settings.speech || !("speechSynthesis" in window)) return;
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    const v = pickVoice(); if(v) u.voice = v;
+    u.lang = v ? v.lang : "zh-TW"; u.rate = state.settings.rate;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+let actx = null;
+function beep(){
+  try{
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if(actx.state === "suspended") actx.resume();
+    const t = actx.currentTime;
+    [[988,0],[784,0.28]].forEach(([f,d]) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = "sine"; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t+d); g.gain.exponentialRampToValueAtTime(0.5, t+d+0.03);
+      g.gain.exponentialRampToValueAtTime(0.0001, t+d+0.25);
+      o.connect(g).connect(actx.destination); o.start(t+d); o.stop(t+d+0.27);
+    });
+  }catch(e){}
+}
+
+/* ---------- 顯示需求 ---------- */
+function activate(msg){
+  current = msg; overlayOpen = true; overlayReadyAt = Date.now() + 800;
+  cancelDwell();
+  overlay.style.setProperty("--cat", msg.color);
+  $("ovIco").textContent = msg.icon || "";
+  $("ovText").textContent = msg.launch ? "開啟：" + msg.text : msg.text;
+  $("ovRepeat").textContent = msg.launch ? "✕ 取消" : "🔊 再說一次";
+  $("ovDone").textContent = msg.launch ? "▶ 開啟" : "✓ 完成";
+  const now = new Date();
+  $("ovTime").textContent = fmtTime(now);
+  overlay.hidden = false;
+  overlay.classList.toggle("alarm", !!msg.alarm);
+  speak(msg.say || msg.text);
+  requestWake();
+
+  const cd = $("countdown");
+  cd.style.transition = "none"; cd.style.transform = "scaleX(1)";
+  clearTimeout(overlayTimer); clearInterval(alarmTimer);
+  if(msg.alarm){
+    cd.style.display = "none";
+    beep(); let n = 0;
+    alarmTimer = setInterval(() => { beep(); if(++n % 2 === 0) setTimeout(() => speak(msg.say || msg.text), 700); }, 2500);
+  }else{
+    cd.style.display = "";
+    const secs = msg.launch ? Math.max(state.settings.overlaySec, 12) : state.settings.overlaySec;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      cd.style.transition = `transform ${secs}s linear`; cd.style.transform = "scaleX(0)";
+    }));
+    overlayTimer = setTimeout(closeOverlay, secs * 1000);
+  }
+  if(!msg.launch) logItems.unshift({t: now.toISOString(), text: msg.text}); logItems = logItems.slice(0,50); saveLog();
+}
+function closeOverlay(){
+  if(!overlayOpen) return;
+  overlayOpen = false; cancelDwell();
+  clearTimeout(overlayTimer); clearInterval(alarmTimer);
+  try{ speechSynthesis.cancel(); }catch(e){}
+  overlay.hidden = true; overlay.classList.remove("alarm");
+  locked = true; app.classList.add("cooling");
+  clearTimeout(unlockTimer);
+  unlockTimer = setTimeout(() => { locked = false; app.classList.remove("cooling"); }, state.settings.cooldownMs);
+}
+bindTarget($("ovRepeat"), () => {
+  if(!current) return;
+  if(current.launch){ closeOverlay(); return; }
+  speak(current.say || current.text);
+  if(!current.alarm){ // 重新計時
+    clearTimeout(overlayTimer);
+    const cd = $("countdown"); cd.style.transition="none"; cd.style.transform="scaleX(1)";
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      cd.style.transition = `transform ${state.settings.overlaySec}s linear`; cd.style.transform = "scaleX(0)";
+    }));
+    overlayTimer = setTimeout(closeOverlay, state.settings.overlaySec * 1000);
+  }
+});
+bindTarget($("ovDone"), () => {
+  if(current && current.launch){
+    const ok = openLink(current.launch);
+    logItems.unshift({t: new Date().toISOString(), text: "開啟 App：" + current.text}); saveLog();
+    closeOverlay();
+    if(!ok) toast("這個畫面無法開啟其他 App");
+    return;
+  }
+  closeOverlay();
+});
+
+/* ---------- 時間、螢幕常亮 ---------- */
+const WD = ["日","一","二","三","四","五","六"];
+const pad = n => String(n).padStart(2,"0");
+function fmtTime(d){ return `${d.getMonth()+1}/${d.getDate()}（${WD[d.getDay()]}）${pad(d.getHours())}:${pad(d.getMinutes())}`; }
+function tick(){ const d = new Date(); $("clock").textContent = `週${WD[d.getDay()]} ${pad(d.getHours())}:${pad(d.getMinutes())}`; }
+tick(); setInterval(tick, 15000);
+let wakeLock = null;
+async function requestWake(){
+  try{ if("wakeLock" in navigator && !wakeLock){ wakeLock = await navigator.wakeLock.request("screen"); wakeLock.addEventListener("release", () => wakeLock = null); } }catch(e){}
+}
+document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible") requestWake(); });
+document.addEventListener("pointerdown", requestWake, {once:true});
+
+/* ---------- 提示訊息 ---------- */
+let toastTimer;
+function toast(t){ const el=$("toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove("show"),2200); }
+
+/* ---------- 設定：長按開啟 ---------- */
+const gear = $("gear"); let holdTimer = null, held = false;
+gear.addEventListener("pointerdown", e => {
+  held = false; gear.classList.add("holding");
+  holdTimer = setTimeout(() => { held = true; gear.classList.remove("holding"); openSettings(); }, 1200);
+});
+["pointerup","pointerleave","pointercancel"].forEach(ev => gear.addEventListener(ev, () => { clearTimeout(holdTimer); gear.classList.remove("holding"); }));
+gear.addEventListener("click", () => { if(!held) toast("照顧者請用手指長按 1 秒開啟設定"); });
+
+let editCat = 0;
+function openSettings(){
+  if(overlayOpen) return;
+  cancelDwell();
+  const s = state.settings;
+  $("sSpeech").checked = s.speech; $("sRate").value = s.rate; $("sOverlay").value = s.overlaySec;
+  $("sCooldown").value = s.cooldownMs; $("sDwell").checked = s.dwell; $("sDwellMs").value = s.dwellMs;
+  loadVoices(); updateVals(); renderThemeSeg(); renderEditCats(); renderEditList(); renderAppList(); renderLog();
+  $("settings").hidden = false;
+}
+$("closeSettings").addEventListener("click", () => { $("settings").hidden = true; renderTabs(); renderBoard(); });
+
+function updateVals(){
+  const s = state.settings;
+  $("sRateVal").textContent = s.rate.toFixed(2) + " 倍";
+  $("sOverlayVal").textContent = s.overlaySec + " 秒";
+  $("sCooldownVal").textContent = (s.cooldownMs/1000).toFixed(1) + " 秒";
+  $("sDwellMsVal").textContent = (s.dwellMs/1000).toFixed(1) + " 秒";
+}
+function bindSetting(id, key, parse, ev="input"){
+  $(id).addEventListener(ev, e => { state.settings[key] = parse(e.target); save(); updateVals(); });
+}
+bindSetting("sSpeech","speech", t=>t.checked, "change");
+bindSetting("sRate","rate", t=>parseFloat(t.value));
+bindSetting("sOverlay","overlaySec", t=>parseInt(t.value,10));
+bindSetting("sCooldown","cooldownMs", t=>parseInt(t.value,10));
+bindSetting("sDwell","dwell", t=>t.checked, "change");
+bindSetting("sDwellMs","dwellMs", t=>parseInt(t.value,10));
+$("sVoice").addEventListener("change", e => { state.settings.voiceURI = e.target.value; save(); speak("這是目前的聲音"); });
+$("sRate").addEventListener("change", () => speak("這是目前的語速"));
+
+function applyTheme(){
+  document.documentElement.dataset.board = state.settings.theme;
+  const bg = getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();
+  const m = document.querySelector('meta[name="theme-color"]'); if(m && bg) m.content = bg;
+}
+function renderThemeSeg(){
+  [...$("sTheme").children].forEach(b => b.setAttribute("aria-pressed", b.dataset.v === state.settings.theme));
+}
+$("sTheme").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  state.settings.theme = b.dataset.v; save(); applyTheme(); renderThemeSeg();
+});
+
+function renderEditCats(){
+  const box = $("editCats"); box.textContent = "";
+  state.categories.forEach((c,i) => {
+    const b = document.createElement("button"); b.className="btn";
+    b.textContent = `${c.icon} ${c.name}`; b.setAttribute("aria-pressed", i===editCat);
+    b.addEventListener("click", () => { editCat=i; renderEditCats(); renderEditList(); });
+    box.appendChild(b);
+  });
+}
+function renderEditList(){
+  const list = $("editList"); list.textContent = "";
+  const items = state.categories[editCat].items;
+  items.forEach((it,i) => {
+    const row = document.createElement("div"); row.className = "edit";
+    const em = document.createElement("input"); em.className="emoji"; em.value = it.icon || ""; em.setAttribute("aria-label","圖示");
+    const tx = document.createElement("input"); tx.value = it.text; tx.setAttribute("aria-label","按鈕文字");
+    em.addEventListener("input", () => { it.icon = em.value.trim(); save(); });
+    tx.addEventListener("input", () => { it.text = tx.value; save(); });
+    const up = document.createElement("button"); up.className="btn"; up.textContent="↑"; up.setAttribute("aria-label","往前移");
+    up.disabled = i===0;
+    up.addEventListener("click", () => { [items[i-1],items[i]]=[items[i],items[i-1]]; save(); renderEditList(); });
+    const play = document.createElement("button"); play.className="btn"; play.textContent="🔊"; play.setAttribute("aria-label","試聽");
+    play.addEventListener("click", () => speak(it.text));
+    const del = document.createElement("button"); del.className="btn btn-danger"; del.textContent="刪除";
+    del.addEventListener("click", () => { if(confirm(`刪除「${it.text}」？`)){ items.splice(i,1); save(); renderEditList(); } });
+    row.append(em, tx, up, play, del); list.appendChild(row);
+  });
+  $("addItem").disabled = items.length >= MAX_ITEMS;
+}
+$("addItem").addEventListener("click", () => {
+  const items = state.categories[editCat].items;
+  if(items.length >= MAX_ITEMS) return;
+  items.push({icon:"💬", text:"新的需求"}); save(); renderEditList();
+  const inputs = $("editList").querySelectorAll("input:not(.emoji)"); const last = inputs[inputs.length-1];
+  if(last){ last.focus(); last.select(); }
+});
+
+function renderLog(){
+  const ul = $("log"); ul.textContent = "";
+  if(!logItems.length){ const li=document.createElement("li"); li.textContent="還沒有紀錄。病人選擇需求後會出現在這裡。"; ul.appendChild(li); return; }
+  logItems.slice(0,30).forEach(l => {
+    const li = document.createElement("li");
+    const t = document.createElement("time"); t.textContent = fmtTime(new Date(l.t));
+    const s = document.createElement("span"); s.textContent = l.text;
+    li.append(t,s); ul.appendChild(li);
+  });
+}
+$("clearLog").addEventListener("click", () => { if(confirm("清除所有需求紀錄？")){ logItems=[]; saveLog(); renderLog(); } });
+
+const dlReady = (window.claude && typeof window.claude.use === "function")
+  ? window.claude.use("downloads").catch(() => null) : Promise.resolve(null);
+async function saveFile(name, data, type){
+  const ns = await dlReady;
+  if(ns){
+    try{ await ns.save({filename:name, data}); toast("已交給裝置儲存"); }
+    catch(e){
+      const c = e && e.code;
+      if(c === "declined") return;
+      if(c === "rate_limited") toast("已經有一個下載視窗開著，請先處理");
+      else toast("這個畫面無法下載檔案");
+    }
+    return;
+  }
+  if(window.claude){ toast("這個畫面無法下載檔案"); return; }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([data], {type}));
+  a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+$("exportBtn").addEventListener("click", () => saveFile("眼動溝通板設定.json", JSON.stringify(state,null,2), "application/json"));
+$("offlineBtn").addEventListener("click", () => {
+  const doc = new DOMParser().parseFromString(PAGE_SRC, "text/html");
+  [...doc.head.children, ...doc.body.children].forEach(el => { if(!el.hasAttribute("data-own")) el.remove(); });
+  doc.documentElement.removeAttribute("data-theme");
+  saveFile("眼動溝通板.html", "<!DOCTYPE html>\n" + doc.documentElement.outerHTML, "text/html");
+});
+$("importFile").addEventListener("change", async e => {
+  const f = e.target.files[0]; if(!f) return;
+  try{
+    const s = JSON.parse(await f.text());
+    if(!s || !Array.isArray(s.categories)) throw 0;
+    state = {settings:{...DEFAULTS.settings, ...s.settings}, categories:s.categories, apps:Array.isArray(s.apps) ? s.apps : clone(DEFAULT_APPS)};
+    save(); applyTheme(); editCat = 0; catIndex = 0; view = "cat"; openSettings(); toast("已匯入設定");
+  }catch(err){ toast("這個檔案不是眼動溝通板的設定檔"); }
+  e.target.value = "";
+});
+$("resetBtn").addEventListener("click", () => {
+  if(!confirm("把所有按鈕還原成預設內容？語音與其他設定會保留。")) return;
+  state.categories = clone(DEFAULTS.categories); save(); editCat=0; catIndex=0; renderEditCats(); renderEditList(); toast("已還原預設按鈕");
+});
+
+/* ---------- App 捷徑 ---------- */
+function ytId(v){
+  const m = v.match(/(?:[?&]v=|youtu\.be\/|shorts\/|embed\/|live\/)([\w-]{11})/);
+  if(m) return m[1];
+  return /^[\w-]{11}$/.test(v) ? v : "";
+}
+function ytWeb(sub, v){
+  switch(sub){
+    case "home": return "https://www.youtube.com/";
+    case "channel":
+      if(!v) return "";
+      if(/^https?:\/\//i.test(v)) return v;
+      if(/^UC[\w-]{20,}$/.test(v)) return "https://www.youtube.com/channel/" + v;
+      return "https://www.youtube.com/@" + encodeURIComponent(v.replace(/^@/, ""));
+    case "video": { const id = ytId(v); return id ? "https://www.youtube.com/watch?v=" + id : ""; }
+    case "playlist": { const m = v.match(/[?&]list=([\w-]+)/); const id = m ? m[1] : (/^[\w-]{10,}$/.test(v) ? v : ""); return id ? "https://www.youtube.com/playlist?list=" + id : ""; }
+    case "search": return v ? "https://www.youtube.com/results?search_query=" + encodeURIComponent(v) : "";
+  }
+  return "";
+}
+function buildUrl(a){
+  const v = (a.value || "").trim();
+  const digits = v.replace(/[^\d+]/g, "");
+  switch(a.type){
+    case "youtube": {
+      const w = ytWeb(a.sub, v); if(!w) return "";
+      if(a.open === "web") return w;
+      if(a.sub === "home") return "youtube://";
+      return /^https?:\/\/(www\.|m\.)?youtube\.com\//i.test(w) ? w.replace(/^https?:\/\/(www\.|m\.)?/i, "youtube://www.") : w;
+    }
+    case "line": {
+      const web = a.open === "web";
+      if(a.sub === "open") return web ? "https://line.me/R/nv/chat" : "line://nv/chat";
+      if(a.sub === "text") return v ? (web ? "https://line.me/R/share?text=" + encodeURIComponent(v) : "line://msg/text/" + encodeURIComponent(v)) : "";
+      if(!v) return "";
+      let w;
+      if(/^https?:\/\//i.test(v)) w = v;
+      else if(v.startsWith("@")) w = "https://line.me/R/ti/p/" + encodeURIComponent(v);
+      else w = "https://line.me/R/ti/p/~" + encodeURIComponent(v.replace(/^~/, ""));
+      if(web) return w;
+      return /^https:\/\/line\.me\//i.test(w) ? w.replace(/^https:\/\/line\.me\/(R\/)?/i, "line://") : w;
+    }
+    case "tel": return digits ? "tel:" + digits : "";
+    case "sms": return digits ? "sms:" + digits : "";
+    case "facetime": return v ? "facetime:" + v.replace(/\s/g, "") : "";
+    case "facetime-audio": return v ? "facetime-audio:" + v.replace(/\s/g, "") : "";
+    case "url": return /^[a-z][\w+.-]*:/i.test(v) ? v : "";
+  }
+  return "";
+}
+function appSub(a){
+  const t = APP_TYPES[a.type]; if(!t) return "";
+  return t.subs ? `${t.name}・${t.subs[a.sub] || ""}` : t.name;
+}
+function openLink(url){
+  if(!url) return false;
+  try{
+    if(/^https?:/i.test(url)){
+      const a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener";
+      document.body.appendChild(a); a.click(); a.remove();
+    }else{
+      window.location.href = url;
+    }
+    return true;
+  }catch(e){ return false; }
+}
+function renderApps(){
+  const list = state.apps || [];
+  const [c,r] = gridFor(Math.max(list.length, 1));
+  boardEl.style.gridTemplateColumns = `repeat(${c},1fr)`;
+  boardEl.style.gridTemplateRows = `repeat(${r},1fr)`;
+  boardEl.textContent = "";
+  if(!list.length){
+    const p = document.createElement("p"); p.className = "note";
+    p.textContent = "還沒有 App 捷徑。照顧者可長按右上角「設定」新增。";
+    boardEl.appendChild(p); return;
+  }
+  list.forEach(a => {
+    const b = document.createElement("button");
+    b.className = "target cell"; b.style.setProperty("--cat", APP_COLOR);
+    b.innerHTML = '<span class="ico" aria-hidden="true"></span><span class="lbl"></span><span class="sub"></span>';
+    b.children[0].textContent = a.icon || "📱"; b.children[1].textContent = a.label || "App";
+    const url = buildUrl(a);
+    b.children[2].textContent = url ? appSub(a) : "尚未設定完成";
+    bindTarget(b, () => {
+      if(!url){ toast("這個捷徑還沒設定完成，請照顧者到設定補上"); return; }
+      activate({icon:a.icon || "📱", text:a.label || appSub(a), color:APP_COLOR, launch:url});
+    });
+    boardEl.appendChild(b);
+  });
+}
+
+function renderAppList(){
+  const box = $("appList"); box.textContent = "";
+  const list = state.apps;
+  const changed = () => { save(); };
+  list.forEach((a,i) => {
+    const card = document.createElement("div"); card.className = "appedit";
+    const l1 = document.createElement("div"); l1.className = "l1";
+    const em = document.createElement("input"); em.className = "emoji"; em.value = a.icon || ""; em.setAttribute("aria-label","圖示");
+    const lb = document.createElement("input"); lb.value = a.label || ""; lb.placeholder = "按鈕名稱，例：看新聞台"; lb.setAttribute("aria-label","按鈕名稱");
+    em.addEventListener("input", () => { a.icon = em.value.trim(); changed(); });
+    lb.addEventListener("input", () => { a.label = lb.value; changed(); });
+    l1.append(em, lb);
+
+    const l2 = document.createElement("div"); l2.className = "l2";
+    const ty = document.createElement("select"); ty.setAttribute("aria-label","類型");
+    Object.entries(APP_TYPES).forEach(([k,t]) => ty.add(new Option(t.name, k)));
+    ty.value = a.type;
+    ty.addEventListener("change", () => {
+      a.type = ty.value; const t = APP_TYPES[a.type];
+      a.sub = t.subs ? Object.keys(t.subs)[0] : ""; if(!t.modes) a.open = "app";
+      changed(); renderAppList();
+    });
+    l2.append(ty);
+    const t = APP_TYPES[a.type] || {};
+    if(t.subs){
+      const sb = document.createElement("select"); sb.setAttribute("aria-label","開啟內容");
+      Object.entries(t.subs).forEach(([k,n]) => sb.add(new Option(n, k)));
+      sb.value = a.sub; sb.addEventListener("change", () => { a.sub = sb.value; changed(); renderAppList(); });
+      l2.append(sb);
+    }
+    if(t.modes){
+      const md = document.createElement("select"); md.setAttribute("aria-label","開啟方式");
+      md.add(new Option("開啟方式：App", "app")); md.add(new Option("開啟方式：網頁連結", "web"));
+      md.value = a.open || "app"; md.addEventListener("change", () => { a.open = md.value; changed(); upd(); });
+      l2.append(md);
+    }
+    card.append(l1, l2);
+
+    let val = null;
+    if(needsValue(a)){
+      val = document.createElement("input"); val.value = a.value || "";
+      val.placeholder = HINT[a.type + ":" + a.sub] || HINT[a.type] || "";
+      val.setAttribute("aria-label","連結內容");
+      if(a.type === "tel" || a.type === "sms") val.inputMode = "tel";
+      val.addEventListener("input", () => { a.value = val.value; changed(); upd(); });
+      card.append(val);
+    }
+
+    const l4 = document.createElement("div"); l4.className = "l4";
+    const url = document.createElement("span"); url.className = "url";
+    const test = document.createElement("button"); test.className = "btn"; test.textContent = "測試";
+    test.addEventListener("click", () => { const u = buildUrl(a); if(!u){ toast("請先填好連結內容"); return; } if(!openLink(u)) toast("這個畫面無法開啟其他 App"); });
+    const up = document.createElement("button"); up.className = "btn"; up.textContent = "↑"; up.setAttribute("aria-label","往前移"); up.disabled = i === 0;
+    up.addEventListener("click", () => { [list[i-1], list[i]] = [list[i], list[i-1]]; changed(); renderAppList(); });
+    const del = document.createElement("button"); del.className = "btn btn-danger"; del.textContent = "刪除";
+    del.addEventListener("click", () => { if(confirm(`刪除「${a.label || "這個捷徑"}」？`)){ list.splice(i,1); changed(); renderAppList(); } });
+    l4.append(url, test, up, del);
+    card.append(l4);
+    function upd(){
+      const u = buildUrl(a);
+      url.classList.toggle("bad", !u);
+      url.textContent = u ? "連結：" + (()=>{ try{ return decodeURI(u); }catch(e){ return u; } })() : (needsValue(a) ? "連結內容還沒填好，或格式不正確" : "");
+    }
+    upd();
+    box.appendChild(card);
+  });
+  $("addApp").disabled = list.length >= MAX_ITEMS;
+}
+$("addApp").addEventListener("click", () => {
+  if(state.apps.length >= MAX_ITEMS) return;
+  state.apps.push({icon:"📺", label:"新的捷徑", type:"youtube", sub:"channel", value:"", open:"app"});
+  save(); renderAppList();
+  const cards = $("appList").querySelectorAll(".appedit"); const last = cards[cards.length-1];
+  if(last){ last.scrollIntoView({block:"center"}); const inp = last.querySelector(".l1 input:not(.emoji)"); if(inp){ inp.focus(); inp.select(); } }
+});
+
+/* ---------- 啟動 ---------- */
+if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+applyTheme(); renderTabs(); renderBoard(); renderSide();
+matchMedia("(orientation:portrait)").addEventListener("change", renderBoard);
+document.addEventListener("gesturestart", e => e.preventDefault());
+})();
+</script>
+</body>
+</html>
